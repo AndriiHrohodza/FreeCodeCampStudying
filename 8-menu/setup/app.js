@@ -82,78 +82,78 @@ let categortyBtns;
 
 
 window.addEventListener("DOMContentLoaded", function () {
-	showButtons();
-	showCards(menu);
+  showButtons();
+  showCards(menu);
 
-	//Get categories
-	function getCategories() {
-		menu.forEach((item, i) => {
-			let itemCategory = item.category;
-			if (!(categories.includes(itemCategory))) {
-				categories.push(itemCategory);
-			}
-		});
-		categories.unshift("all");
-		return categories;
-	}
+  //Get categories
+  function getCategories() {
+    menu.forEach((item, i) => {
+      let itemCategory = item.category;
+      if (!(categories.includes(itemCategory))) {
+        categories.push(itemCategory);
+      }
+    });
+    categories.unshift("all");
+    return categories;
+  }
 
-	//Show buttons
-	function showButtons() {
-		getCategories();
-		categortyBtns = categories.map((item) => {
+  //Show buttons
+  function showButtons() {
+    getCategories();
+    categortyBtns = categories.map((item) => {
 
-			return `<button type="button" class="filter-btn" data-id="${item}">
-			          ${item}
-			        </button>`
+      return `<button type="button" class="filter-btn" data-id="${item}">
+                ${item}
+              </button>`
 
-		});
+    });
 
-		categortyBtns = categortyBtns.join("");
-		btnsWrapper.innerHTML = categortyBtns;
-	}
+    categortyBtns = categortyBtns.join("");
+    btnsWrapper.innerHTML = categortyBtns;
+  }
 
-	//Show cards
-	function showCards(menu) {
-	  let cards = menu.map((item) => {
+  //Show cards
+  function showCards(menu) {
+    let cards = menu.map((item) => {
 
-	    return `<article class="menu-item">
-	          <img src=${item.img} alt=${item.title} class="photo" />
-	          <div class="item-info">
-	            <header>
-	              <h4>${item.title}</h4>
-	              <h4 class="price">$${item.price}</h4>
-	            </header>
-	            <p class="item-text">
-	              ${item.desc}
-	            </p>
-	          </div>
-	        </article>`;
+      return `<article class="menu-item">
+            <img src=${item.img} alt=${item.title} class="photo" />
+            <div class="item-info">
+              <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">$${item.price}</h4>
+              </header>
+              <p class="item-text">
+                ${item.desc}
+              </p>
+            </div>
+          </article>`;
 
-	  });
+    });
 
-	  cards = cards.join("");
-	  sectionCenter.innerHTML = cards;
-	}
+    cards = cards.join("");
+    sectionCenter.innerHTML = cards;
+  }
 
-	//Sorted logic
-	btnsWrapper.addEventListener('click', (e) => {
-		let target = e.target.closest(".filter-btn");
-		if (!target) {
-			return;
-		}
-		let dataId = target.dataset.id;
+  //Sorted logic
+  btnsWrapper.addEventListener('click', (e) => {
+    let target = e.target.closest(".filter-btn");
+    if (!target) {
+      return;
+    }
+    let dataId = target.dataset.id;
 
-		if (dataId != "all") {
-			menu.forEach((item, i) => {
-				if (dataId == item.category) {
-					sortedMenu.push(item);
-				}
-			});
-			showCards(sortedMenu);
-			sortedMenu.length = 0;
-		} else {
-			showCards(menu);
-		}
+    if (dataId != "all") {
+      menu.forEach((item, i) => {
+        if (dataId == item.category) {
+          sortedMenu.push(item);
+        }
+      });
+      showCards(sortedMenu);
+      sortedMenu.length = 0;
+    } else {
+      showCards(menu);
+    }
 
-	});
+  });
 });
