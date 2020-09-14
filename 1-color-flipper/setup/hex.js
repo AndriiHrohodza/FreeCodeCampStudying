@@ -6,23 +6,23 @@ let hexLength = 6;
 
 //Return random number
 let getRandomInt = () => {
-	return Math.floor(Math.random() * hex.length);
+  return Math.floor(Math.random() * hex.length);
 }
 
 //Get index
 let getHexes = () => {
-	let index = "#";
-	for (let i = 0; i < hexLength; i++) {
-		let rundomNubmer = getRandomInt();
+  let index = "#";
+  for (let i = 0; i < hexLength; i++) {
+    let rundomNubmer = getRandomInt();
 
-		index += hex[rundomNubmer];
-	}
-	return index;
+    index += hex[rundomNubmer];
+  }
+  return index;
 }
 
 //Event listener, on btn click change color
 btn.addEventListener('click', () => {
-	let index = getHexes();
-	document.body.style.backgroundColor = index;
-	colorWrapper.innerHTML = index;
+  let index = getHexes();
+  document.body.style.backgroundColor = index;
+  colorWrapper.innerHTML = index;
 })
