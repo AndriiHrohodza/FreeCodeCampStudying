@@ -18,7 +18,7 @@ const menu = [
   {
     id: 3,
     title: "godzilla milkshake",
-    category: "shakes",
+    category: "dinner",
     price: 6.99,
     img: "./images/item-3.jpeg",
     desc: `ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
@@ -72,3 +72,88 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+const sectionCenter = document.querySelector(".section-center");
+const btnsWrapper = document.querySelector(".btn-container");
+let categories = [];
+let sortedMenu = [];
+let categortyBtns;
+
+
+
+window.addEventListener("DOMContentLoaded", function () {
+  showButtons();
+  showCards(menu);
+
+  //Get categories
+  function getCategories() {
+    menu.forEach((item, i) => {
+      let itemCategory = item.category;
+      if (!(categories.includes(itemCategory))) {
+        categories.push(itemCategory);
+      }
+    });
+    categories.unshift("all");
+    return categories;
+  }
+
+  //Show buttons
+  function showButtons() {
+    getCategories();
+    categortyBtns = categories.map((item) => {
+
+      return `<button type="button" class="filter-btn" data-id="${item}">
+                ${item}
+              </button>`
+
+    });
+
+    categortyBtns = categortyBtns.join("");
+    btnsWrapper.innerHTML = categortyBtns;
+  }
+
+  //Show cards
+  function showCards(menu) {
+    let cards = menu.map((item) => {
+
+      return `<article class="menu-item">
+            <img src=${item.img} alt=${item.title} class="photo" />
+            <div class="item-info">
+              <header>
+                <h4>${item.title}</h4>
+                <h4 class="price">$${item.price}</h4>
+              </header>
+              <p class="item-text">
+                ${item.desc}
+              </p>
+            </div>
+          </article>`;
+
+    });
+
+    cards = cards.join("");
+    sectionCenter.innerHTML = cards;
+  }
+
+  //Sorted logic
+  btnsWrapper.addEventListener('click', (e) => {
+    let target = e.target.closest(".filter-btn");
+    if (!target) {
+      return;
+    }
+    let dataId = target.dataset.id;
+
+    if (dataId != "all") {
+      menu.forEach((item, i) => {
+        if (dataId == item.category) {
+          sortedMenu.push(item);
+        }
+      });
+      showCards(sortedMenu);
+      sortedMenu.length = 0;
+    } else {
+      showCards(menu);
+    }
+
+  });
+});

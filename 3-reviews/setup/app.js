@@ -52,53 +52,53 @@ showCard(reviews[cardIndex]);
 
 //Buttons event listeners
 btnsWrapper.addEventListener('click', function(e) {
-	let currentBtn = e.target.closest('.btn');
+  let currentBtn = e.target.closest('.btn');
 
-	if (!currentBtn) {
-		return;
-	}
+  if (!currentBtn) {
+    return;
+  }
 
-	if (currentBtn.classList.contains('prev-btn')) {
-		plusCards(-1);
-	} else if (currentBtn.classList.contains('next-btn')) {
-		plusCards(1);
-	}
+  if (currentBtn.classList.contains('prev-btn')) {
+    plusCards(-1);
+  } else if (currentBtn.classList.contains('next-btn')) {
+    plusCards(1);
+  }
 
 });
 
 //Random btn logic
 randomBtn.addEventListener('click', function(e) {
-	let randomIndex = Math.floor(Math.random() * reviews.length);
-	showCard(cardIndex += randomIndex);
+  let randomIndex = Math.floor(Math.random() * reviews.length);
+  showCard(cardIndex += randomIndex);
 });
 
 //Show cards
 function showCard(n) {
-	getCardIndex(n);
-	let card = reviews[cardIndex];
-	let name = card.name;
-	let job = card.job;
-	let img = card.img;
-	let text = card.text;
+  getCardIndex(n);
+  let card = reviews[cardIndex];
+  let name = card.name;
+  let job = card.job;
+  let img = card.img;
+  let text = card.text;
 
-	imageWrapper.setAttribute('src', img);
-	nameWrapper.innerHTML = name;
-	jobWrapper.innerHTML = job;
-	textWrapper.innerHTML = text;
+  imageWrapper.setAttribute('src', img);
+  nameWrapper.innerHTML = name;
+  jobWrapper.innerHTML = job;
+  textWrapper.innerHTML = text;
 
 }
 //Plus cards
 function plusCards(n) {
-	showCard(cardIndex += n);
+  showCard(cardIndex += n);
 }
 
 //Get cardIndex
 function getCardIndex(n) {
-	if (n > reviews.length - 1) {
-		cardIndex = 0;
-	}
-	if (n < 0) {
-		cardIndex = reviews.length - 1;
-	}
-	return cardIndex;
+  if (n > reviews.length - 1) {
+    cardIndex = 0;
+  }
+  if (n < 0) {
+    cardIndex = reviews.length - 1;
+  }
+  return cardIndex;
 }

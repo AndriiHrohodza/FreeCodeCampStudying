@@ -6,11 +6,11 @@ let index;
 
 //Return random number
 let getRandomInt = () => {
-	return Math.floor(Math.random() * colors.length);
+  return Math.floor(Math.random() * colors.length);
 }
 //Event listener, on btn click change color
 btn.addEventListener('click', () => {
- 	index = getRandomInt();
-	document.body.style.backgroundColor = colors[index];
-	colorWrapper.innerHTML = colors[index];
+   index = getRandomInt();
+  document.body.style.backgroundColor = colors[index];
+  colorWrapper.innerHTML = colors[index];
 })
